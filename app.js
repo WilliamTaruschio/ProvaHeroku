@@ -10,8 +10,6 @@ var fileUpload = require('express-fileupload');
 var app = express();
 
 
-//mongoose.connect('mongodb://williamTaruschio:taruschio2@ds159112.mlab.com:59112/pw_e-commerce')
-//var db=mongoose.connection;
 
 var frontend = require('./routes/frontend');
 //var backend = require('./routes/backend');
