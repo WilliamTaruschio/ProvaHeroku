@@ -9,6 +9,9 @@ var fileUpload = require('express-fileupload');
 //var mongoose=require('mongoose');
 var app = express();
 
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+var port = process.env.PORT || 8080;
 
 
 var frontend = require('./routes/frontend');
@@ -34,7 +37,9 @@ app.use(fileUpload());
 // SOCKET IO SRV GLOBAL INIT
 var ioMan = require('./zzCustom/socketGlobal');
 var server = require('http').Server(app);
-ioMan.server(app.listen(process.env.PORT || 3000, () => console.log('listening!')));
+ioMan.server(app.listen(port, function() {
+  console.log('Our app is running on http://localhost:' + port);
+}));
 
 /* socketio */
 app.use(session({
