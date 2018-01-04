@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var monGlo = require('../zzCustom/mongoGlobal');
+var monGlo = require('/zzCustom/mongoGlobal');
 var ObjectID = require("mongodb").ObjectID;
 
 /* HOME */
