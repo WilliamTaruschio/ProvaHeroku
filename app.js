@@ -32,7 +32,7 @@ app.use(fileUpload());
 
 /* SOCKET.IO */
 // SOCKET IO SRV GLOBAL INIT
-var ioMan = require('zzCustom/socketGlobal');
+var ioMan = require('/zzCustom/socketGlobal');
 var server = require('http').Server(app);
 ioMan.server(app.listen(3000, () => console.log('listening on port 3000')));
 
