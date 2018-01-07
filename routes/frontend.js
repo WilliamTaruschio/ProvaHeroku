@@ -14,6 +14,53 @@ router.get('/', function (req, res) {
         });
     });
 });
+router.post('/login', function(req, res, next) {
+    funzione(req, function(dati) {
+        var query = { email: req.body.login_email, password: req.body.login_password };
+        console.log(query);
+        console.log(req.body);
+        var uid;
+        monGlo.find('Utenti', query, {}, function(data) {
+            console.log(data);
+            if (data.length == 0) {
+                res.redirect('/');
+            } else {
+                uid = data[0]._id;
+                query = { codice: uid };
+                monGlo.find('Sessione', query, {}, function(data) {
+                    if (data.length == 0) {
+                        query = { codice: uid, stato: true };
+                        monGlo.insert('Sessione', query, function(data) {
+                            req.session.buser = data[0]._id;
+                            res.redirect('/');
+                        });
+                    } else {
+                        query = { codice: uid };
+                        monGlo.update('Sessione', query, { stato: false }, function(data) {
+                            query = { codice: uid, stato: true };
+                            monGlo.insert('Sessione', query, function(data) {
+                                req.session.buser = data[0]._id;
+                                res.redirect('/');
+                            });
+                        });
+                    }
+                });
+            }
+        });
+    });
+});
+router.get('/logout', function(req, res, next) {
+    funzione(req, function(dati) {
+        var uid = req.session.buser;
+        req.session.destroy();
+        var query = { _id: ObjectID(uid) };
+        monGlo.update('Sessione', query, { stato: false }, function(data) {
+            monGlo.remove('Sessione', { stato: false }, function(data) {
+                res.redirect('/');
+            });
+        });
+    });
+});
 /* HOME */
 
 
@@ -70,6 +117,26 @@ router.post('/registrazione', function(req, res, next) {
     }
 });
 /* REGISTRAZIONE */
+/* PROFILO */
+router.get('/profilo', function(req, res, next) {
+    funzione(req, function(dati) {
+        if (dati.logged == false)
+            res.redirect('/');
+        else {
+            monGlo.find('Utenti', { _id: ObjectID(dati.userID) }, {}, function(found) {
+                res.render('index', { title: 'il mio profilo', contenuto: 'profilo',contenuto_sub: 'datiutente', auth: dati.logged, dati_utente: found[0] });
+            });
+        }
+    });
+});
+router.get('/profilo/storicoordini', function(req, res, next) {
+    funzione(req, function(dati) {
+        if (dati.logged == false)
+            res.redirect('/');
+        res.render('index', { title: 'il mio profilo', contenuto: 'profilo', contenuto_sub: 'storicoordini'});
+    });
+});
+/* PROFILO */
 
 function funzione(req, callback) {
     var out = { prodotti: '', logged: false, userID: '' };

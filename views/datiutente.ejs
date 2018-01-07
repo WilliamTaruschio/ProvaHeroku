@@ -1,0 +1,51 @@
+<div class="singin-tab">
+    <h2>Profilo Utente</h2>
+</div>
+<form class="singin-form" method="post" action="" name="datiutente" >
+    <p>
+        <label for="nome" required>Nome:</label>
+        <input class="singin-input" name="nome" type="text" id="nome" value="<%- dati_utente.nome %>">
+    </p>
+    <p>
+        <label for="cognome" required>Cognome:</label>
+        <input class="singin-input" name="cognome" type="text" id="cognome" value="<%- dati_utente.cognome %>">
+    </p>
+    <p>
+        <label for="email" required>Email:</label>
+        <input class="singin-input" name="email" type="email" id="email" value="<%- dati_utente.email %>">
+    </p>
+    <p>
+        <label for="indirizzo" required>Indirizzo:</label>
+        <input class="singin-input" name="indirizzo" type="text" id="indirizzo" value="<%- dati_utente.indirizzo %>">
+    </p>
+    <p>
+        <label for="stato" required>Stato:
+                    <select name="stato" id="stato" class="singin-input">
+                        <option value="italia" <% if(dati_utente.stato == 'italia') %> <%- 'selected="selected"' %> >italia</option>
+                        <option value="germania">germania</option>
+                        <option value="francia">francia</option>
+                        <option value="portogallo">portogallo</option>
+                        <option value="spagna">spagna</option>
+                        <option value="irlanda">irlanda</option>
+                    </select>
+                </label>
+    </p>
+    <p>
+        <label for="provincia" required>Provincia:
+                    <input class="singin-input" type="text" name="provincia"  value="<%- dati_utente.provincia %>"/>
+                </label>
+    </p>
+    <p>
+        <label for="telefono" required>Tel.</label>
+        <input class="singin-input" type="tel" id="telefono" name="telefono" value="<%- dati_utente.telefono %>">
+    </p>
+    <p>
+        <label for="password">Password:</label>
+        <input class="singin-input" name="password" type="password" id="password">
+    </p>
+    <p>
+        <!-- value da "Invia" a "Salva modifiche" -->
+        <input class="singin-button" type="submit" value="Salva modifiche">
+    </p>
+</form>
+</div>
