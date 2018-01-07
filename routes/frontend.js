@@ -72,6 +72,7 @@ router.get('/registrazione', function (req, res) {
         else
     res.render('index',{ title: 'registrazione' ,contenuto:'registrazione',errore: null,auth: dati.logged});
 });
+});
 router.post('/registrazione', function(req, res, next) {
     if (req.body.nome == '' || req.body.cognome == '' || req.body.email == '' || req.body.indirizzo == '' || req.body.stato == '' || req.body.provincia == '' || req.body.telefono == '' || req.body.password == '') {
         funzione(req, function(dati) {
