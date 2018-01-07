@@ -54,27 +54,29 @@
                 </div><!-- /.container-fluid -->
                 
               </nav>
-       
-        <form style="padding-top:100px">
+              <% if(errore != null) {%>
+                <%-'<h3 style="color:#ffaaaa;">'+ errore + '</h3>' %>
+                    <% } %>
+        <form style="padding-top:100px" method="POST" action="/registrazione" name="registrazione">
                 <div class="form-group">
-                    <label class="col-form-label" for="formGroupNome">Nome</label>
-                    <input type="text" class="form-control" id="formGroupName" placeholder="Example input">
+                    <label class="col-form-label" for="formGroupNome" required>Nome</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Example input">
                 </div>
                 <div class="form-group">
-                    <label class="col-form-label" for="formGroupCognome">Cognome</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                    <label class="col-form-label" for="formGroupCognome" required>Cognome</label>
+                    <input type="text" class="form-control" id="cognome" placeholder="Another input">
                 </div>
                 <div class="form-group">
-                    <label class="col-form-label" for="formGroupEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                    <label class="col-form-label" for="formGroupEmail" required>Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email">
                 </div>
                 <div class="form-group">
-                        <label class="col-form-label" for="formGroupIndirizzo">Indirizzo</label>
-                        <input type="text" class="form-control" id="formGroupIndirizzo" placeholder="Example input">
+                        <label class="col-form-label" for="formGroupIndirizzo" required>Indirizzo</label>
+                        <input type="text" class="form-control" id="indirizzo" placeholder="Example input">
                 </div>
                 <div class="form-group">
                             <label for="inputState">Stato</label>
-                            <select id="inputState" class="form-control">
+                            <select id="stato" class="form-control">
                               <option selected>Italia</option>
                               <option>Spagna</option>
                               <option>Francia</option>
@@ -83,16 +85,16 @@
                             </select>
                 </div>
                 <div class="form-group">
-                        <label class="col-form-label" for="formGroupProvincia">Provincia</label>
-                        <input type="text" class="form-control" id="formGroupProvincia" placeholder="Example input">
+                        <label class="col-form-label" for="formGroupProvincia" required>Provincia</label>
+                        <input type="text" class="form-control" id="provincia" placeholder="Example input">
                 </div>
                 <div class="form-group">
-                        <label class="col-form-label" for="formGroupTelefono">Telefono</label>
-                        <input type="tel" class="form-control" id="formGroupTelefono" placeholder="Example input">
+                        <label class="col-form-label" for="formGroupTelefono" required>Telefono</label>
+                        <input type="tel" class="form-control" id="telefono" placeholder="Example input">
                 </div>
                 <div class="form-group">
-                        <label class="col-form-label" for="formGroupPassword">Password</label>
-                        <input type="password" class="form-control" id="formGroupPassword" placeholder="Example input">
+                        <label class="col-form-label" for="formGroupPassword" required>Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Example input">
                 </div>
                 <button class="btn btn-primary" type="submit">Invia</button>
               </form>
