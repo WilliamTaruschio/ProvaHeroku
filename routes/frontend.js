@@ -27,6 +27,7 @@ router.post('/registrazione', function(req, res, next) {
             res.render('registrazione', { title: 'registrazione', errore: 'dati non corretti', auth: dati.logged });
         });
     } else {
+        console.log(req.body);
         funzione(req, function(dati) {
             monGlo.find('Utenti', {}, { codice: 1 }, function(data) {
                 var newCode = 0;
@@ -38,7 +39,7 @@ router.post('/registrazione', function(req, res, next) {
                         var uid;
                         monGlo.find('Utenti', query, {}, function(data) {
                             if (data.length == 0) {
-                                res.render('template', { title: 'registrazione', contenuto: 'registrazione', menu: dati.menu, categorie: dati.categorie, menuattivo: null, errore: 'dati non corretti', auth: dati.logged });
+                                res.render('registrazione', { title: 'registrazione', contenuto: 'registrazione', menu: dati.menu, categorie: dati.categorie, menuattivo: null, errore: 'dati non corretti', auth: dati.logged });
                             } else {
                                 uid = data[0]._id;
                                 query = { codice: uid };
@@ -47,7 +48,7 @@ router.post('/registrazione', function(req, res, next) {
                                         query = { codice: uid, stato: true };
                                         monGlo.insert('Sessione', query, function(data) {
                                             req.session.buser = data[0]._id;
-                                            res.redirect('/profilo');
+                                            res.redirect('/');
                                         });
                                     } else {
                                         query = { codice: uid };
@@ -55,7 +56,7 @@ router.post('/registrazione', function(req, res, next) {
                                             query = { codice: uid, stato: true };
                                             monGlo.insert('Sessione', query, function(data) {
                                                 req.session.buser = data[0]._id;
-                                                res.redirect('/profilo');
+                                                res.redirect('/');
                                             });
                                         });
                                     }
