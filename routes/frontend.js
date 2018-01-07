@@ -40,7 +40,7 @@ router.post('/login', function(req, res, next) {
                             query = { codice: uid, stato: true };
                             monGlo.insert('Sessione', query, function(data) {
                                 req.session.buser = data[0]._id;
-                                res.render('/',{auth: dati.logged} );
+                                res.render('index',{auth: dati.logged} );
                             });
                         });
                     }
