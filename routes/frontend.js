@@ -19,12 +19,12 @@ router.get('/', function (req, res) {
 
 /* REGISTRAZIONE da sistemare, creare collections carrelli e sessione */
 router.get('/registrazione', function (req, res) {
-    res.render('registrazione.ejs',{errore: null});
+    res.render('index',{ title: 'registrazione' ,contenuto:'registrazione',errore: null});
 });
 router.post('/registrazione', function(req, res, next) {
     if (req.body.nome == '' || req.body.cognome == '' || req.body.email == '' || req.body.indirizzo == '' || req.body.stato == '' || req.body.provincia == '' || req.body.telefono == '' || req.body.password == '') {
         funzione(req, function(dati) {
-            res.render('registrazione', { title: 'registrazione', errore: 'dati non corretti', auth: dati.logged });
+            res.render('index', { title: 'registrazione',contenuto:'registrazione',errore: 'dati non corretti', auth: dati.logged });
         });
     } else {
         console.log(req.body);
@@ -39,7 +39,7 @@ router.post('/registrazione', function(req, res, next) {
                         var uid;
                         monGlo.find('Utenti', query, {}, function(data) {
                             if (data.length == 0) {
-                                res.render('registrazione', { title: 'registrazione', contenuto: 'registrazione', menu: dati.menu, categorie: dati.categorie, menuattivo: null, errore: 'dati non corretti', auth: dati.logged });
+                                res.render('index', { title: 'registrazione',contenuto:'registrazione', errore: 'dati non corretti', auth: dati.logged });
                             } else {
                                 uid = data[0]._id;
                                 query = { codice: uid };
