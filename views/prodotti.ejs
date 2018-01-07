@@ -1,0 +1,29 @@
+<% var i=0; %>
+<% while(i< prodotti.length) { %>
+  <div class="row">
+    <% for(var j =0; (j<4) && (i< prodotti.length); j++) { %>
+      <div class="col-sm-3 col-xs-6">
+        <div class="thumbnail">
+          <img src="https://source.unsplash.com/280x280/?technology" alt="">
+          <div class="caption">
+            <h3>
+              <%= prodotti[i].nome %>
+            </h3>
+            <p style="text-align: justify">
+              <%= prodotti[i].descrizione %>
+            </p>
+            <h3 style="text-align: center">
+              <%= prodotti[i].prezzo %> € </h3>
+            <hr></hr>
+            <p>
+              <a href="#" class="btn btn-primary " role="button">Compra</a>
+              <a href="#" class="btn btn-default" role="button">Dettagli</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% i++; %>
+        <% } %>
+
+  </div>
+  <% } %>
