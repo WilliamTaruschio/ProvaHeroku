@@ -66,6 +66,10 @@ router.get('/logout', function(req, res, next) {
 
 /* REGISTRAZIONE da sistemare, creare collections carrelli e sessione */
 router.get('/registrazione', function (req, res) {
+    funzione(req, function(dati) {
+        if (dati.logged == true)
+        res.render('index', { title: 'il mio profilo', contenuto: 'profilo', contenuto_sub: 'datiutente', auth: dati.logged });
+        else
     res.render('index',{ title: 'registrazione' ,contenuto:'registrazione',errore: null,auth: dati.logged});
 });
 router.post('/registrazione', function(req, res, next) {
