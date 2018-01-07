@@ -40,7 +40,7 @@ router.post('/login', function(req, res, next) {
                             query = { codice: uid, stato: true };
                             monGlo.insert('Sessione', query, function(data) {
                                 req.session.buser = data[0]._id;
-                                res.redirect('/');
+                                res.render('/',{auth: dati.logged} );
                             });
                         });
                     }
@@ -66,7 +66,7 @@ router.get('/logout', function(req, res, next) {
 
 /* REGISTRAZIONE da sistemare, creare collections carrelli e sessione */
 router.get('/registrazione', function (req, res) {
-    res.render('index',{ title: 'registrazione' ,contenuto:'registrazione',errore: null});
+    res.render('index',{ title: 'registrazione' ,contenuto:'registrazione',errore: null,auth: dati.logged});
 });
 router.post('/registrazione', function(req, res, next) {
     if (req.body.nome == '' || req.body.cognome == '' || req.body.email == '' || req.body.indirizzo == '' || req.body.stato == '' || req.body.provincia == '' || req.body.telefono == '' || req.body.password == '') {
