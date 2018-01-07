@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
     funzione(req, function (dati) {
         console.log(dati);
         monGlo.find('Prodotti', {}, {}, function (search_result) {
-            res.render('index', { title: 'home',contenuto:'prodotti', prodotti: dati.prodotti });
+            res.render('index', { title: 'home',contenuto:'prodotti', prodotti: dati.prodotti,auth: dati.logged });
         });
     });
 });
