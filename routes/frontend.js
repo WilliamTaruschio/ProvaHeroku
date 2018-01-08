@@ -4,9 +4,9 @@ var router = express.Router();
 var monGlo = require('../zzCustom/mongoGlobal');
 var ObjectID = require("mongodb").ObjectID;
 
-/* HOME */
+/* HOME da sistemare*/
 
-router.get('/', function (req, res) {
+router.get('/', function (req, res,next) {
     funzione(req, function (dati) {
         console.log(dati);
         monGlo.find('Prodotti', {}, {}, function (search_result) {
@@ -40,7 +40,7 @@ router.post('/login', function(req, res, next) {
                             query = { codice: uid, stato: true };
                             monGlo.insert('Sessione', query, function(data) {
                                 req.session.buser = data[0]._id;
-                                res.render('index',{auth: dati.logged} );
+                                res.redirect('/');
                             });
                         });
                     }
@@ -149,14 +149,14 @@ function funzione(req, callback) {
         out.prodotti = dati_collezione;
         if (req.session.buser !== undefined) {
             var query = { _id: ObjectID(req.session.buser), stato: true };
-            monGlo.find('sessione', query, {}, function(data) {
+            monGlo.find('Sessione', query, {}, function(data) {
                 if (data.length != 0) {
                     out.userID = data[0].codice;
                     out.logged = true;
                 }
                 callback(out);
             });
-        }
+        }else
         callback(out);
     });
 };
