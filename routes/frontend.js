@@ -143,6 +143,28 @@ router.get('/profilo/storicoordini', function(req, res, next) {
 });
 /* PROFILO */
 
+/* PRODOTTO */
+router.get('/prodotto', function(req, res, next) {
+    //Titolo = nome del prodotto
+    var codice_prodotto = req.query.pro;
+    console.log('codice del prodotto'+req.query.pro);
+    var _id= (codice_prodotto);
+    console.log('id  '+_id);
+    funzione(req, function(dati) {
+        monGlo.find('Prodotti', { _id:ObjectID(codice_prodotto) }, {}, function(dati_prodotto) {
+                res.render('index', {
+                    title: 'prodotto',
+                    contenuto: 'prodotto',
+                    dati_prodotto: dati_prodotto[0],
+                    auth: dati.logged
+                
+            });
+        });
+    });
+});
+/* PRODOTTO */
+
+
 function funzione(req, callback) {
     var out = { prodotti: '', logged: false, userID: '' };
     monGlo.find('Prodotti', {}, { codice: 1 }, function (dati_collezione) {
@@ -160,4 +182,47 @@ function funzione(req, callback) {
         callback(out);
     });
 };
+
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+
+router.get('/cerca',function(req,res,next){
+    funzione(req, function (dati) {
+if(req.query.search){
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    console.log('regex' + regex);
+    monGlo.find('Prodotti',{nome:regex},{},function(dati_ricerca){
+        console.log('prodotti ricercati: '+ dati_ricerca[0]);
+        res.render('index', { title: 'home',contenuto:'prodotti', prodotti: dati_ricerca ,auth: dati.logged });
+        
+
+    });
+}
+
+});
+});
+
+/* CATEGORIA */
+router.get('/categoria',function(req,res,next){
+    
+        var categoria_prodotto = req.query.cat;
+        console.log('categoria del prodotto'+req.query.cat);
+        funzione(req, function(dati) {
+            monGlo.find('Prodotti', { categoria:categoria_prodotto }, {}, function(dati_prodotto) {
+                console.log(dati_prodotto[0]);
+                    res.render('index', {
+                        title: 'prodotto',
+                        contenuto: 'prodotti',
+                        prodotti: dati_prodotto,
+                        auth: dati.logged
+                    });
+                });
+            });
+});
+
+
+
 module.exports = router;

@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var fileUpload = require('express-fileupload');
-//var mongoose=require('mongoose');
+
 var app = express();
 
 // set the port of our application

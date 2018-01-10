@@ -11,6 +11,7 @@
 
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" type="image" href="../images">
 </head>
 
 <body>
@@ -88,9 +89,9 @@
 
           <% } %>
 
-        <form class="navbar-form navbar-right">
+        <form class="navbar-form navbar-right" action="/cerca" method="GET">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" class="form-control" name="search" placeholder="Search">
           </div>
           <button type="submit" class="btn btn-default">Cerca</button>
         </form>
@@ -99,38 +100,39 @@
       <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
-
   </nav>
-  <nav id="navbar-categorie" class="navbar navbar-default">
-    <div class="container">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"
-        aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-        <ul class="nav navbar-nav">
-          <li id="categoria">
-            <a href="#">Laptops </a>
-          </li>
-          <li id="categoria">
-            <a href="#">Desktops </a>
-          </li>
-          <li id="categoria">
-            <a href="#">Monitors </a>
-          </li>
-          <li id="categoria">
-            <a href="#">Tablets </a>
-          </li>
-          <li id="categoria">
-            <a href="#">Accessori </a>
-          </li>
-        </ul>
-      </div>
-
-  </nav>
+    <% if(contenuto == 'prodotti')  {%>
+    <nav id="navbar-categorie" class="navbar navbar-default">
+      <div class="container">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"
+          aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2" >
+          <ul class="nav navbar-nav">
+            <li id="categoria">
+              <a href="#" onclick="window.location = window.location.origin + '/categoria?cat=laptops';">Laptops </a>
+            </li>
+            <li id="categoria">
+              <a href="#" onclick="window.location = window.location.origin + '/categoria?cat=desktops';">Desktops </a>
+            </li>
+            <li id="categoria">
+              <a href="#" onclick="window.location = window.location.origin + '/categoria?cat=monitors';">Monitors </a>
+            </li>
+            <li id="categoria">
+              <a href="#" onclick="window.location = window.location.origin + '/categoria?cat=tablets';">Tablets </a>
+            </li>
+            <li id="categoria">
+              <a href="#" onclick="window.location = window.location.origin + '/categoria?cat=accessori';">Accessori </a>
+            </li>
+          </ul>
+        </div>
+    
+    </nav>
+    <% } %>
 
   <!-- inizio contenuti -->
   <div id="contenuto" class="container">
