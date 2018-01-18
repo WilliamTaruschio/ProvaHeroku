@@ -26,11 +26,11 @@
 
             <div class="col-sm-3">
 
-                <form id="form-modifica" class="singin-form" method="POST" action="/amministrazione/update?id=<%- prodotti[i]._id %>">
+                <form id="form-modifica" class="singin-form" method="POST" action="/amministrazione/update">
 
                     <div class="form-group">
-                        <label class="col-form-label" for="nome" name="id" required>ID:
-                            <%- prodotti[i]._id %></label>
+                        <input  type="hidden" class="col-form-label" name="id" value="<%- prodotti[i]._id %>" >
+                            
                     </div>
                     <div class="form-group">
                         <label class="col-form-label" for="nome" required>Nome:</label>
@@ -62,7 +62,7 @@
 
                     <div class="form-group">
                         <!-- value da "Invia" a "Salva modifiche" -->
-                        <button class="btn btn-primary" type="submit">Modifica</button>
+                        <button class="btn btn-primary" type="submit" id="modifica" >Modifica</button>
                         <button class="btn btn-danger" type="submit" formaction="/amministrazione/delete?id=<%- prodotti[i]._id %>">Elimina</button>
                     </div>
                 </form>
@@ -71,3 +71,7 @@
 
         </div>
         <% } %>
+
+        <script>
+        
+        </script>

@@ -2,19 +2,44 @@
     <h1>
         I MIEI ORDINI
     </h1>
-    <ul class="list-order">
-        <li>
-            <div class="order">
-                <div class="order-details-button">
-                    <input class="button-details-download" name="Dettagli ordine" type="submit" value="Dettagli ordine">
-                </div>
-                <div class="order-date">
-                    AQUISTATO IL: 05/05/2011
-                </div>
-                <div class="total-order-price">
-                    TOTALE ORDINE
-                </div>
-            </div>
-        </li>
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Prodotto</th>
+                <th scope="col">Quantità</th>
+                <th scope="col">Prezzo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i<ordini.length; i++){ %>
+                <tr>
+                    <td scope="row">
+                        <%- (ordini[i]).data
+                        %>
+                    </td>
+                    <td name="nome" class="col-sm-3">
+
+                        <h2>
+                            <%- (ordini[i]).nome %>
+                        </h2>
+
+
+                    </td>
+                    <td name="quantità">
+                        <h3>
+                            <%- (ordini[i]).quantità %>
+                        </h3>
+                    </td>
+                    <td name="prezzo">
+                        <h3>
+                            <%- (ordini[i]).prezzo %>
+                        </h3>
+                    </td>
+
+                </tr>
+
+                <% } %>
+        </tbody>
+    </table>
 </div>

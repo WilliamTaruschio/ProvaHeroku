@@ -8,7 +8,8 @@
   <title>
     <%= title %>
   </title>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="../css/style.css">
   <link rel="stylesheet" type="image" href="../images">
@@ -41,6 +42,9 @@
 
         <% if(auth == false) {%>
           <ul class="nav navbar-nav navbar-right">
+              <li>
+                  <a href="#" onclick="window.location = window.location.origin + '/carrello';">Carrello</a>
+                </li>
             <li>
               <a href="#" onclick="window.location= window.location.origin + '/registrazione';">registrati</a>
             </li>
@@ -75,6 +79,8 @@
                     function funzioneAmministratore() {
                     if (document.getElementById("check-amministratore").checked == true) {
                       document.getElementById("form-login").action = "/amministrazione/login"
+                    }else{
+                      document.getElementById("form-login").action = "/login"
                     }
                   }
                 </script>
@@ -97,7 +103,7 @@
               </li>
               <li>
                 <!-- Carrello da fare-->
-                <a href="#" onclick="window.location= window.location.origin + '/';">Carrello</a>
+                <a href="#" onclick="window.location = window.location.origin + '/carrello';">Carrello</a>
               </li>
 
 
@@ -153,8 +159,7 @@
       <div id="contenuto" class="container">
         <%- include(contenuto) %>
       </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <script src="../js/bootstrap.min.js"></script>
+      
 </body>
 
 </html>
