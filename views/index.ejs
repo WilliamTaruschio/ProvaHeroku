@@ -32,13 +32,6 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active">
-            <a href="#">Contattaci
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-        </ul>
 
         <% if(auth == false) {%>
           <ul class="nav navbar-nav navbar-right">
@@ -46,13 +39,13 @@
                   <a href="#" onclick="window.location = window.location.origin + '/carrello';">Carrello</a>
                 </li>
             <li>
-              <a href="#" onclick="window.location= window.location.origin + '/registrazione';">registrati</a>
+              <a href="#" onclick="window.location= window.location.origin + '/registrazione';">Registrati</a>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Accedi
                 <span class="caret"></span>
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" style="padding: 15px;">
 
                 <form method="POST" id="form-login" action="/login">
                   <div class="form-group">
@@ -65,7 +58,7 @@
                     <input type="password" class="form-control" id="accesso-password" name="login_password" placeholder="password">
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check-amministratore" onClick="funzioneAmministratore()">
+                    <input class="form-check-input" type="checkbox" value="" id="check-amministratore" onClick="funzioneAmministratore()" style="width:16px; height:16px" >
                     <label class="form-check-label" for="defaultCheck1">
                       Amministratore
                     </label>
@@ -88,7 +81,7 @@
 
                 </li>
                 <li>
-                  <a href="#">Non ricordo la mia password</a>
+                  <a href="#" onclick="window.location= window.location.origin + '/passwordDimenticata';">Non ricordo la mia password</a>
                 </li>
               </ul>
             </li>
