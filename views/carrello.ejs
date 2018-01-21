@@ -64,7 +64,7 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <button class="btn btn-primary" name="Compra" type="submit" onclick=" window.location = window.location.origin + '/carrello/acquista';">Acquista</button>
+                                <button id="compra" class="btn btn-primary" name="Compra" type="submit" onclick=" window.location = window.location.origin + '/carrello/acquista';">Acquista</button>
 
                             </td>
 
@@ -129,17 +129,11 @@
             }
         });
     }
-    function acquista() {
-        $.ajax({
-            type: "POST",
-            url: window.location.origin +'/carrello/acquista',
-            timeout: 2000,//timeout,
-            data: {
-            },
-            error: function (jqXHR, textStatus, err) {
-                console.log(jqXHR);
-            }
-        });
-    }
+
+    $('#compra').click(function () {
+        alert('Grazie per aver acquistato sul nostro sito!');
+    });
+
+
 
 </script>

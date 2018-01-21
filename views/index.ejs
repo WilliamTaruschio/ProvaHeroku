@@ -35,9 +35,9 @@
 
         <% if(auth == false) {%>
           <ul class="nav navbar-nav navbar-right">
-              <li>
-                  <a href="#" onclick="window.location = window.location.origin + '/carrello';">Carrello</a>
-                </li>
+            <li>
+              <a href="#" onclick="window.location = window.location.origin + '/carrello';">Carrello</a>
+            </li>
             <li>
               <a href="#" onclick="window.location= window.location.origin + '/registrazione';">Registrati</a>
             </li>
@@ -58,7 +58,7 @@
                     <input type="password" class="form-control" id="accesso-password" name="login_password" placeholder="password">
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check-amministratore" onClick="funzioneAmministratore()" style="width:16px; height:16px" >
+                    <input class="form-check-input" type="checkbox" value="" id="check-amministratore" onClick="funzioneAmministratore()" style="width:16px; height:16px">
                     <label class="form-check-label" for="defaultCheck1">
                       Amministratore
                     </label>
@@ -69,10 +69,10 @@
 
                 <script>
 
-                    function funzioneAmministratore() {
+                  function funzioneAmministratore() {
                     if (document.getElementById("check-amministratore").checked == true) {
                       document.getElementById("form-login").action = "/amministrazione/login"
-                    }else{
+                    } else {
                       document.getElementById("form-login").action = "/login"
                     }
                   }
@@ -146,13 +146,35 @@
         </div>
 
     </nav>
-    <% } %>
+    <% }else if(contenuto == 'profilo') { %>
+      <nav id="navbar-categorie" class="navbar navbar-default">
+        <div class="container">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"
+            aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav">
+              <li id="profilo">
+                <a href="#" onclick="window.location = window.location.origin + '/profilo';">Profilo </a>
+              </li>
+              <li id="profilo">
+                <a href="#" onclick="window.location = window.location.origin + '/profilo/storicoordini';">Ordini </a>
+              </li>
+            </ul>
+          </div>
 
-      <!-- inizio contenuti -->
-      <div id="contenuto" class="container">
-        <%- include(contenuto) %>
-      </div>
-      
+      </nav>
+      <% } %>
+
+        <!-- inizio contenuti -->
+        <div id="contenuto" class="container">
+          <%- include(contenuto) %>
+        </div>
+
 </body>
 
 </html>

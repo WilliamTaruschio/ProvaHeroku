@@ -97,7 +97,7 @@ router.post('/registrazione', function (req, res, next) {
                 var newCode = 0;
                 if (data.length != 0)
                     newCode = data[data.length - 1].codice + 1;
-                monGlo.insert('Utenti', { codice: Number(newCode), nome: req.body.nome, cognome: req.body.cognome, email: req.body.email, indirizzo: req.body.indirizzo, stato: req.body.stato, provincia: req.body.provincia, telefono: req.body.telefono, password: req.body.password }, function (result) {
+                monGlo.insert('Utenti', { codice: Number(newCode), nome: req.body.nome, cognome: req.body.cognome, email: req.body.email, indirizzo: req.body.indirizzo, stato: req.body.stato, provincia: req.body.provincia, telefono: req.body.telefono, password: req.body.password,amministratore: false }, function (result) {
                     var query = { codice: Number(result[0].codice) };
                     monGlo.insert('Carrelli', { codice_utente: result[0]._id, carrello: '[]' }, function (cartRes) {
                         var uid;
@@ -162,6 +162,28 @@ router.get('/profilo/storicoordini', function (req, res, next) {
         }
     });
 });
+router.post('/modificaprofilo', function (req, res, next) {
+    funzione(req, function (dati) {
+        if (dati.logged == false) {
+            res.redirect('/');
+        } else {
+            if (req.body.nome == '' || req.body.cognome == '' || req.body.email == '' || req.body.indirizzo == '' || req.body.stato == '' || req.body.provincia == '' || req.body.telefono == '' || req.body.password == '') {
+                funzione(req, function (dati) {
+                    res.render('index', { title: 'registrazione', contenuto: 'registrazione', errore: 'dati non corretti', auth: dati.logged });
+                });
+            } else {
+                console.log('id : ' + dati.userID);
+                monGlo.update('Utenti', { _id: ObjectID(dati.userID) }, { nome: req.body.nome, cognome: req.body.cognome, email: req.body.email, indirizzo: req.body.indirizzo, stato: req.body.stato, provincia: req.body.provincia, telefono: req.body.telefono, password: req.body.password }, function (data) {
+                    console.log('profilo modificato');
+                    res.redirect('/profilo');
+
+                })
+            }
+        }
+    });
+});
+
+
 /* PROFILO */
 
 /* PRODOTTO */
@@ -474,11 +496,11 @@ router.get('/passwordDimenticata', function (req, res, next) {
 
 });
 router.post('/nuovaPassword', function (req, res, next) {
-    console.log('corpo : '+req.body.password1);
-    var email=req.body.emailnuovapassword;
-    var password= req.body.password1;
-    var confermapassword= req.body.password2;
-    if (email== '' || password == '' || confermapassword == '') {
+    console.log('corpo : ' + req.body.password1);
+    var email = req.body.emailnuovapassword;
+    var password = req.body.password1;
+    var confermapassword = req.body.password2;
+    if (email == '' || password == '' || confermapassword == '') {
         funzione(req, function (dati) {
             res.redirect('/');
         });
@@ -509,7 +531,7 @@ router.post('/nuovaPassword', function (req, res, next) {
             res.redirect('/');
         });
 
-    }else{
+    } else {
         res.redirect('/passwordDimenticata');
     }
 });
@@ -659,8 +681,8 @@ router.post('/amministrazione/aggiungi', function (req, res, next) {
                     monGlo.insert('Prodotti', {
                         nome: prodotto.nome,
                         descrizione: prodotto.descrizione,
-                        prezzo: prodotto.prezzo,
-                        quantità: prodotto.quantità,
+                        quantità: Number(prodotto.quantità),
+                        prezzo: parseFloat(prodotto.prezzo),
                         categoria: prodotto.categoria,
                         avverti_user: ""
                     }, function (data) {
@@ -712,8 +734,8 @@ router.post('/amministrazione/update', function (req, res, next) {
                 monGlo.update('Prodotti', { _id: ObjectID(salva_prodotto.id) }, {
                     nome: salva_prodotto.nome,
                     descrizione: salva_prodotto.descrizione,
-                    prezzo: salva_prodotto.prezzo,
                     quantità: Number(salva_prodotto.quantità),
+                    prezzo: parseFloat(salva_prodotto.prezzo),
                     categoria: salva_prodotto.categoria
                 }, function () {
                     if (Number(salva_prodotto.quantità) > 0) {
